@@ -1,0 +1,49 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    services:
+      sqlserver:
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        env:
+          ACCEPT_EULA: "Y"
+          MSSQL_SA_PASSWORD: "TestPassword123!"
+        ports:
+          - 1433:1433
+        options: >-
+          --health-cmd "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P TestPassword123! -C -Q 'SELECT 1' || /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P TestPassword123! -Q 'SELECT 1'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+      - run: dotnet restore src/MarketFlow.Api/MarketFlow.Api.csproj
+      - run: dotnet restore tests/MarketFlow.Tests/MarketFlow.Tests.csproj
+      - run: dotnet build src/MarketFlow.Api/MarketFlow.Api.csproj --no-restore
+      - run: dotnet test tests/MarketFlow.Tests/MarketFlow.Tests.csproj --no-restore
+        env:
+          ConnectionStrings__DefaultConnection: "Server=localhost;Database=MarketFlowTest;User Id=sa;Password=TestPassword123!;TrustServerCertificate=True"
+      - run: dotnet format src/MarketFlow.Api/MarketFlow.Api.csproj --verify-no-changes
+
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: cd web && npm ci
+      - run: cd web && npm run lint
+      - run: cd web && npm test -- --run
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker compose build

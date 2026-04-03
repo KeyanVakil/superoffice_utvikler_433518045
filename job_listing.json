@@ -1,0 +1,42 @@
+{
+  "ad_id": "433518045",
+  "url": "https://www.finn.no/job/ad/433518045",
+  "title": "Utvikler",
+  "company": "SuperOffice",
+  "location": "",
+  "deadline": "",
+  "description": "Legg til som favoritt.\nDele ikon\nUtvikler\nSuperOffice\nFrist\nSnarest\nAnsettelsesform\nFast\nUtvikler\nAt SuperOffice, we believe that strong relationships are at the heart of every successful business. Our mission is to help companies build meaningful, lasting connections with their customers and we do that through smart, intuitive CRM technology that always puts people first.\nAbout the CRM Marketing product team:\nAs a Software Engineer in our CRM Marketing product team, you’ll develop and improve the tools that help customers attract, engage, and retain their audiences. From email campaigns to marketing automation, analytics, and customer journeys, your work will empower marketers to create meaningful interactions that drive growth.\nThis is an exciting time to join: we’re integrating AI into our CRM to make marketing smarter, more personalized, and data-driven. You’ll be part of a team turning innovation into features that help users succeed.\n⚙️ What you’ll do\nDesign, build, test, and ship new features across our CRM platform\nTake ownership of parts of the codebase as you grow\nWork across C#, .NET, TypeScript, SQL, and modern web tech\nHelp shape architecture, improve performance, and contribute to better ways of working\nCollaborate closely with designers, engineers, and product owners\nBring curiosity, clarity, and craft to everything you build\n⭐\nWhat you bring\n3–5 years’ experience with C# and full‑stack development\nSolid engineering fundamentals and a love for maintainable code\nExperience with CI/CD (Azure DevOps or GitHub)\nA collaborative mindset—you enjoy learning and helping others grow\nCuriosity and drive: you try, learn, adapt, repeat\n🤝\nWhat we offer\nHybrid work + 5 weeks vacation\nA dynamic, innovative tech environment\nCompetitive salary & strong pension, health, travel, and life insurance\n15% discount to SATS\nDaily lunch, snacks, and your own in‑house barista\nA social and supportive culture with clubs, events, and the legendary Christmas House\nA beautiful office in the heart of Oslo\n🦉\nAbout SuperOffice\nWe’re one of Europe’s leading CRM providers, empowering thousands of businesses every day. Founded in 1990 in Norway, we now have 250 employees across Europe and we’re just getting started.\nNot sure you check every box?\nApply anyway. Great people rarely fit into perfect lists. You might be exactly who we’re looking for!\nFerdigheter\nC# (Programmeringsspråk)\nCI/CD (Continuous Integration and Continuous Delivery)\nFullstack utvikler\nGitHub\nIngeniørarbeid\nSQL\nTypeScript\nOm arbeidsgiveren\nDriven by a passion for helping SMBs build valuable, effortless customer relationships, SuperOffice is one of Europe’s most trusted CRM providers. Our platform empowers teams across sales, marketing and customer service to work more effectively, serve customers better and create real business impact. With a proven track record, local expertise and a scalable, future-proof platform, SuperOffice is the preferred choice for more than 5,000 European businesses.\nSuperOffice was founded in Norway in 1990 and is today an international company with offices located in Norway, Sweden, Denmark, Germany, Netherlands, Switzerland, and Lithuania. In addition, we have international partners in Europe and North America.\nSektor\n:\nPrivat\nSted\n:\nWergelandsveien 27,\n0558\nOslo\nHjemmekontor\n:\nDelvis hjemmekontor\nBransje\n:\nInternettbaserte tjenester\n,\nIT - programvare\n,\nMarkedsføring og annonsering\nStillingsfunksjon\n:\nBackend-utvikler\n,\nFull stack utvikler\n,\nUtvikler (generell)\nArbeidsspråk\n:\nEngelsk, Norsk\nNøkkelord\nutvikler, crm, c#, .net, ai\nForrige bilde\nPil til venstre\nNeste bilde\nPil til høyre\n(1/4)\nSpørsmål om stillingen\nKontaktperson\n:\nEva Thorsdottir\nStillingstittel\n:\nTalent Acquisition Specialist\nSend melding\nBli kjent med SuperOffice\nHjemmeside\nFlere stillinger fra SuperOffice\nFølg firma\n60 følger dette firmaet\nFirmaets beliggenhet\nWergelandsveien 27,\n0558\nOslo\nAnnonseinformasjon\nFINN-kode\n433518045\nSist endret\n10.3.2026, 11:59\nRapporter annonse",
+  "json_ld": null,
+  "analysis": {
+    "is_software_role": true,
+    "english_friendly": 0.85,
+    "sponsorship_likely": 0.7,
+    "practical_viability": 0.78,
+    "tech_stack": [
+      "C#",
+      ".NET",
+      "TypeScript",
+      "SQL",
+      "Azure DevOps",
+      "GitHub",
+      "CI/CD"
+    ],
+    "required_skills": [
+      "3-5 years C# experience",
+      "Full-stack development",
+      "CI/CD (Azure DevOps or GitHub)",
+      "SQL",
+      "Engineering fundamentals"
+    ],
+    "nice_to_have_skills": [
+      "AI/ML integration experience",
+      "Architecture design",
+      "Marketing automation domain knowledge",
+      "Performance optimization"
+    ],
+    "experience_level": "mid",
+    "summary": "Software Engineer role on the CRM Marketing product team at SuperOffice, a well-established Norwegian CRM provider with 250 employees across Europe. You'll build features across email campaigns, marketing automation, analytics, and customer journeys — with a current focus on integrating AI into the platform. The stack is C#, .NET, TypeScript, and SQL, with Azure DevOps or GitHub for CI/CD. The role is hybrid, based in Oslo, and involves close collaboration with designers, engineers, and product owners.",
+    "why_foreigner_friendly": "Strong candidate for a foreigner. The official working language field lists both English and Norwegian ('Engelsk, Norsk'), meaning English is a recognized working language on the team — not just tolerated. The job description's core sections (duties, requirements, benefits) are written entirely in English, which strongly signals the team operates in English day-to-day. SuperOffice is a 250-person international company with offices in 7 countries, giving them both the HR infrastructure and the incentive to sponsor skilled engineers from abroad. The tech stack (C#, .NET, TypeScript) is entirely international, and the role is clearly skills-driven. Norwegian is co-listed as a working language so some Norwegian-speaking colleagues will be present, but it is not a hard requirement and should not be a barrier."
+  },
+  "foreigner_score": 0.77
+}
