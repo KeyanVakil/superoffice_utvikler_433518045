@@ -7,10 +7,12 @@ namespace MarketFlow.Api.Services;
 public class AiSuggestionService
 {
     private readonly AppDbContext _db;
+    private readonly SegmentService _segmentService;
 
-    public AiSuggestionService(AppDbContext db)
+    public AiSuggestionService(AppDbContext db, SegmentService segmentService)
     {
         _db = db;
+        _segmentService = segmentService;
     }
 
     public SubjectSuggestionResponse GenerateSubjectSuggestions(string draftSubject, string? campaignContext)
@@ -78,11 +80,9 @@ public class AiSuggestionService
 
         if (segmentId.HasValue)
         {
-            var contactIds = await _db.ContactTags
-                .Select(ct => ct.ContactId)
-                .Distinct()
-                .ToListAsync();
-            // Use all contacts if we can't narrow by segment easily
+            var segmentContacts = await _segmentService.EvaluateSegmentAsync(segmentId.Value);
+            var contactIds = segmentContacts.Select(c => c.Id).ToHashSet();
+            query = query.Where(e => contactIds.Contains(e.ContactId));
         }
 
         var openEvents = await query
