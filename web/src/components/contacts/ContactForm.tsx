@@ -61,21 +61,18 @@ export default function ContactForm({
       if (e.key === "Enter" || e.key === ",") {
         e.preventDefault();
         const tag = tagInput.trim().replace(/,/g, "");
-        if (tag && !tags.includes(tag)) {
-          setTags([...tags, tag]);
+        if (tag) {
+          setTags((prev) => (prev.includes(tag) ? prev : [...prev, tag]));
         }
         setTagInput("");
       }
     },
-    [tagInput, tags],
+    [tagInput],
   );
 
-  const handleRemoveTag = useCallback(
-    (tag: string) => {
-      setTags(tags.filter((t) => t !== tag));
-    },
-    [tags],
-  );
+  const handleRemoveTag = useCallback((tag: string) => {
+    setTags((prev) => prev.filter((t) => t !== tag));
+  }, []);
 
   const handleSubmit = useCallback(
     async (e: React.FormEvent) => {
