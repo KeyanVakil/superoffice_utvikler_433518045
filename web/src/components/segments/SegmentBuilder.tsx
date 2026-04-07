@@ -185,6 +185,9 @@ export default function SegmentBuilder() {
   /* Trigger preview on rule changes */
   useEffect(() => {
     fetchPreview(groups);
+    return () => {
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+    };
   }, [groups, fetchPreview]);
 
   /* ── Rule mutations ──────────────────────────────── */

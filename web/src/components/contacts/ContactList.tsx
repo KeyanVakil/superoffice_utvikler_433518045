@@ -76,8 +76,8 @@ export default function ContactList() {
       try {
         await api.delete(id);
         refetch();
-      } catch {
-        /* error handled by refetch */
+      } catch (err) {
+        alert(`Failed to delete contact: ${err instanceof Error ? err.message : String(err)}`);
       }
     },
     [refetch],
