@@ -1,0 +1,65 @@
+# ACI deployment template for MarketFlow
+# Deploy with: ./deploy.sh (handles secrets via Azure CLI, nothing hardcoded)
+#
+# Secrets are injected at deploy time by the script:
+#   - ACR_PASSWORD: from `az acr credential show`
+#   - MSSQL_SA_PASSWORD: generated or passed as env var
+#   - ConnectionStrings: assembled from the above
+
+apiVersion: 2021-09-01
+location: northeurope
+name: marketflow
+type: Microsoft.ContainerInstance/containerGroups
+properties:
+  osType: Linux
+  restartPolicy: Always
+  ipAddress:
+    type: Public
+    dnsNameLabel: marketflow-demo
+    ports:
+      - protocol: TCP
+        port: 80
+  imageRegistryCredentials:
+    - server: marketflowacr.azurecr.io
+      username: marketflowacr
+      password: DEPLOY_SCRIPT_INJECTS_THIS
+  containers:
+    - name: db
+      properties:
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        resources:
+          requests:
+            cpu: 1.0
+            memoryInGb: 2.0
+        environmentVariables:
+          - name: ACCEPT_EULA
+            value: "Y"
+          - name: MSSQL_SA_PASSWORD
+            secureValue: DEPLOY_SCRIPT_INJECTS_THIS
+        ports: []
+
+    - name: api
+      properties:
+        image: marketflowacr.azurecr.io/marketflow-api:latest
+        resources:
+          requests:
+            cpu: 0.5
+            memoryInGb: 1.0
+        environmentVariables:
+          - name: ConnectionStrings__DefaultConnection
+            secureValue: DEPLOY_SCRIPT_INJECTS_THIS
+          - name: ASPNETCORE_URLS
+            value: "http://+:5000"
+          - name: ASPNETCORE_ENVIRONMENT
+            value: "Production"
+        ports: []
+
+    - name: web
+      properties:
+        image: marketflowacr.azurecr.io/marketflow-web:latest
+        resources:
+          requests:
+            cpu: 0.25
+            memoryInGb: 0.5
+        ports:
+          - port: 80
