@@ -8,6 +8,8 @@ namespace MarketFlow.Tests.Integration;
 
 public class CustomWebApplicationFactory : WebApplicationFactory<Program>
 {
+    private readonly string _dbName = "TestDb_" + Guid.NewGuid();
+
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.ConfigureServices(services =>
@@ -18,7 +20,7 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
 
             // Add InMemory database for testing
             services.AddDbContext<AppDbContext>(options =>
-                options.UseInMemoryDatabase("TestDb_" + Guid.NewGuid()));
+                options.UseInMemoryDatabase(_dbName));
         });
     }
 }
