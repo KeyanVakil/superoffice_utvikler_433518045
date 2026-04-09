@@ -16,9 +16,14 @@ az group create --name "$RG" --location "$LOCATION" --output none
 echo "==> Creating ACR..."
 az acr create --resource-group "$RG" --name "$ACR" --sku Basic --admin-enabled true --output none
 
-echo "==> Building and pushing images..."
-az acr build --registry "$ACR" --image marketflow-api:latest ./src/MarketFlow.Api/
-az acr build --registry "$ACR" --image marketflow-web:latest ./web/
+echo "==> Logging into ACR..."
+az acr login --name "$ACR"
+
+echo "==> Building and pushing images locally..."
+docker build -t "${ACR}.azurecr.io/marketflow-api:latest" ./src/MarketFlow.Api/
+docker build -t "${ACR}.azurecr.io/marketflow-web:latest" ./web/
+docker push "${ACR}.azurecr.io/marketflow-api:latest"
+docker push "${ACR}.azurecr.io/marketflow-web:latest"
 
 echo "==> Fetching ACR credentials..."
 ACR_PASSWORD=$(az acr credential show --name "$ACR" --query "passwords[0].value" -o tsv)
