@@ -9,7 +9,8 @@ public class AiSuggestionServiceTests
     private AiSuggestionService CreateService()
     {
         var db = TestDbContextFactory.Create();
-        return new AiSuggestionService(db);
+        var segmentService = new SegmentService(db);
+        return new AiSuggestionService(db, segmentService);
     }
 
     [Fact]
