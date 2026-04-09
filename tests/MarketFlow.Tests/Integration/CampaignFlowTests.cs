@@ -23,10 +23,11 @@ public class CampaignFlowTests : IClassFixture<CustomWebApplicationFactory>
     [Fact]
     public async Task Test_Full_Campaign_Flow()
     {
-        // 1. Create contacts
+        // 1. Create contacts with a unique industry to avoid collisions with seed data
         var uniqueId = Guid.NewGuid().ToString("N")[..8];
-        var contact1 = new CreateContactDto("Flow1", "User", $"flow1-{uniqueId}@test.com", "FlowCorp", "Technology", null);
-        var contact2 = new CreateContactDto("Flow2", "User", $"flow2-{uniqueId}@test.com", "FlowCorp", "Technology", null);
+        var uniqueIndustry = $"FlowTest_{uniqueId}";
+        var contact1 = new CreateContactDto("Flow1", "User", $"flow1-{uniqueId}@test.com", "FlowCorp", uniqueIndustry, null);
+        var contact2 = new CreateContactDto("Flow2", "User", $"flow2-{uniqueId}@test.com", "FlowCorp", uniqueIndustry, null);
         var contact3 = new CreateContactDto("Flow3", "User", $"flow3-{uniqueId}@test.com", "OtherCorp", "Finance", null);
 
         var r1 = await _client.PostAsJsonAsync("/api/contacts", contact1);
@@ -36,10 +37,10 @@ public class CampaignFlowTests : IClassFixture<CustomWebApplicationFactory>
         r2.StatusCode.Should().Be(HttpStatusCode.Created);
         r3.StatusCode.Should().Be(HttpStatusCode.Created);
 
-        // 2. Create segment targeting Technology
+        // 2. Create segment targeting the unique industry
         var segmentDto = new CreateSegmentDto("Flow Tech Segment", "Test segment", new List<SegmentRuleDto>
         {
-            new(0, "industry", "equals", "Technology")
+            new(0, "industry", "equals", uniqueIndustry)
         });
         var segmentResponse = await _client.PostAsJsonAsync("/api/segments", segmentDto);
         segmentResponse.StatusCode.Should().Be(HttpStatusCode.Created);
@@ -62,7 +63,7 @@ public class CampaignFlowTests : IClassFixture<CustomWebApplicationFactory>
         var sentCampaign = await getCampaignResponse.Content.ReadFromJsonAsync<CampaignDetailDto>();
         sentCampaign!.Status.Should().Be("Sent");
         sentCampaign.SentAt.Should().NotBeNull();
-        sentCampaign.SendCount.Should().Be(2); // Only Technology contacts
+        sentCampaign.SendCount.Should().Be(2); // Only contacts with the unique industry
 
         // 6. Verify stats
         var statsResponse = await _client.GetAsync($"/api/campaigns/{campaign.Id}/stats");
